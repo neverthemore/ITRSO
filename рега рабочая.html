@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация и Вход</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #00b09b, #96c93d); /* Градиент от зеленого к синему */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 400px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .toggle-btn {
+      padding: 10px 20px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    .toggle-btn:hover {
+      color: #00b09b; /* Цвет при наведении */
+    }
+
+    #btn {
+      width: 50%;
+      height: 4px;
+      background: linear-gradient(to right, #00b09b, #96c93d);
+      border-radius: 5px;
+      margin: auto;
+      transition: 0.5s;
+    }
+
+    .form {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form.active {
+      display: flex; /* Отображение активной формы */
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #999;
+      border-radius: 5px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .input-field:focus {
+      border-color: #00b09b; /* Цвет поля при фокусе */
+    }
+
+    .submit-btn {
+      width: 85%;
+      padding: 10px;
+      cursor: pointer;
+      background: linear-gradient(to right, #00b09b, #96c93d);
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(to right, #96c93d, #00b09b); /* Цвет кнопки при наведении */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="tabs">
+      <div id="btn"></div>
+      <button type="button" class="toggle-btn" onclick="showLogin()">Вход</button>
+      <button type="button" class="toggle-btn" onclick="showRegistration()">Регистрация</button>
+    </div>
+
+    <form id="login" class="form active">
+      <input type="text" id="login_ticket" class="input-field" placeholder="Студенческий билет" required>
+      <input type="password" id="login_password" class="input-field" placeholder="Пароль" required>
+      <button type="submit" class="submit-btn" onclick="login(event)">Войти</button>
+    </form>
+
+    <form id="register" class="form">
+      <input type="text" id="reg_ticket" class="input-field" placeholder="Студенческий билет" required>
+      <input type="text" id="reg_name" class="input-field" placeholder="ФИО" required>
+      <input type="password" id="reg_password" class="input-field" placeholder="Пароль" required>
+      <button type="submit" class="submit-btn" onclick="register(event)">Зарегистрироваться</button>
+    </form>
+  </div>
+
+  <script>
+    // Моковая база данных студентов
+    let studentsDB = [];
+
+    // Функция для отображения формы регистрации
+    function showRegistration() {
+      document.getElementById("login").classList.remove("active");
+      document.getElementById("register").classList.add("active");
+      document.getElementById("btn").style.left = "50%";
+    }
+
+    // Функция для отображения формы входа
+    function showLogin() {
+      document.getElementById("login").classList.add("active");
+      document.getElementById("register").classList.remove("active");
+      document.getElementById("btn").style.left = "0";
+    }
+
+    // Функция для регистрации
+    function register(event) {
+      event.preventDefault();
+      const ticket = document.getElementById("reg_ticket").value;
+      const name = document.getElementById("reg_name").value;
+      const password = document.getElementById("reg_password").value;
+
+      // Проверка на наличие студенческого билета в базе данных
+      const studentExists = studentsDB.find(student => student.ticket === ticket);
+      if (studentExists) {
+        alert("Студенческий билет уже зарегистрирован.");
+        return;
+      }
+
+      // Добавляем студента в базу данных
+      studentsDB.push({
+        ticket: ticket,
+        name: name,
+        password: password
+      });
+
+      alert("Регистрация прошла успешно.");
+      showLogin(); // Переключаем на форму входа
+    }
+
+    // Функция для входа
+    function login(event) {
+      event.preventDefault();
+      const ticket = document.getElementById("login_ticket").value;
+      const password = document.getElementById("login_password").value;
+
+      // Поиск студента в базе данных
+      const student = studentsDB.find(student => student.ticket === ticket && student.password === password);
+
+      if (student) {
+        alert(`Добро пожаловать, ${student.name}!`);
+      } else {
+        alert("Неверный студенческий билет или пароль.");
+      }
+    }
+  </script>
+</body>
+
+</html>
+
+
