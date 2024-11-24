@@ -1,0 +1,89 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: white;
+}
+
+.card {
+    width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="url"],
+.form-group input[type="date"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    box-sizing: border-box;
+    border-radius: 3px;
+    border-bottom: 1px solid #ccc;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group input[type="url"]:focus,
+.form-group input[type="date"]:focus,
+.form-group input[type="password"]:focus {
+    outline: none;
+    border-bottom-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+}
+
+
+a > button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 0 10px;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+a:first-of-type > button {
+    background-color: #4F4BB3;
+    color: white;
+    width: 30%;
+}
+
+a:nth-of-type(2) > button {
+    background-color: #848484;
+    color: white;
+    width: 60%;
+}
+
