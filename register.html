@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="lifestyle.css?rnd=<?= time()>">
+</head>
+<body>
+<form class="card"
+      action="src/actions/register.php"
+      method="post"
+      enctype="multipart/form-data">
+  <h2>Регистрация</h2>
+
+  <div class="form-group">
+    <label for="surname"></label>
+    <input type="text"
+           id="surname"
+           name="surname"
+           placeholder="Фамилия" required>
+  </div>
+
+  <div class="form-group">
+    <label for="name"></label>
+    <input type="text"
+           id="name"
+           name="name"
+           placeholder="Имя" required>
+  </div>
+
+  <div class="form-group">
+    <label for="middle_name"></label>
+    <input type="text"
+           id="middle_name"
+           name="middle_name"
+           placeholder="Отчество (при наличии)">
+  </div>
+
+  <div class="form-group">
+    <label for="birthdate"></label>
+    <input type="date"
+           id="birthdate"
+           name="birthdate"
+           placeholder="Дата рождения" required>
+  </div>
+
+  <div class="form-group">
+    <label for="group"></label>
+    <input type="text"
+           id="group"
+           name="group"
+           placeholder="Учебная группа" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email"></label>
+    <input type="email"
+           id="email"
+           name="email"
+           placeholder="E-mail" required>
+  </div>
+
+  <div class="form-group">
+    <label for="phone"></label>
+    <input type="tel"
+           id="phone"
+           name="phone"
+           placeholder="Номер телефона" required>
+  </div>
+
+  <div class="form-group">
+    <label for="vk"></label>
+    <input type="url"
+           id="vk"
+           name="vk"
+           placeholder="Ссылка на ВК" required>
+  </div>
+
+  <div class="form-group">
+    <label for="telegram"></label>
+    <input type="url"
+           id="telegram"
+           name="telegram"
+           placeholder="Ссылка на Telegram" required>
+  </div>
+
+  <div class="form-group">
+    <label for="password"></label>
+    <input type="password"
+           id="password"
+           name="password"
+           placeholder="Придумайте пароль" required>
+  </div>
+
+  <div class="form-group">
+    <label for="password_confirmation"></label>
+    <input type="password"
+           id="password_confirmation"
+           name="password_confirmation"
+           placeholder="Повторите пароль" required>
+  </div>
+
+  <fieldset>
+    <label>
+      <input type="checkbox"
+             id="terms"
+             name="terms" required>
+      <a href="#">Согласен на обработку персональных данных</a>
+    </label>
+  </fieldset>
+
+  <button type="submit" id="submit" disabled>Зарегистрироваться</button>
+</form>
+
+</body>
+</html>
