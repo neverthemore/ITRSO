@@ -1,0 +1,207 @@
+:root {
+    --font-width: calc(100vw / 1680);
+    --font-height: calc(100vh / 1050);
+    --menu-width: calc(var(--font-width) * 110);
+    --menu-height: calc(var(--font-height) * 1010);
+    --calendar-width: calc(var(--font-width) * 358);
+    --calendar-height: calc(var(--font-height) * 310);
+    --event-height: calc(var(--font-height) * 206);
+    --grid-height: calc(var(--font-height) * 890);
+    --square-size: calc(var(--font-width) * 78);
+    --square-event-width: calc(var(--font-width) * 154);
+    --square-event-height: calc(var(--font-width) * 300);
+}
+
+body {
+    background: linear-gradient(to bottom left, #1C8C92 30%, #4D6CBA 70%, #6F3388 100%);
+    height: 100vh;
+    margin: 0;
+    position: relative; /* для правильной работы абсолютного позиционирования */
+}
+
+html, body {
+    overflow: hidden; /* Убирает скроллы */
+    height: 100%; /* Убедитесь, что высота 100% */
+}
+
+.menu { /* МЕНЮ */
+    width: var(--menu-width);
+    height: var(--menu-height);
+    left: calc(var(--font-height) * 20); /* отступы снизу = сверху */
+    top: calc(var(--font-height) * 20);
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+}
+
+.container2 { /* КАЛЕНДАРЬ */
+    width: var(--calendar-width);
+    height: var(--calendar-height);
+    left: calc(var(--font-height) * 20 * 2 + var(--menu-width));
+    top: calc(var(--font-height) * 20);
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+}
+
+.container3 { /* ВЫБОРКА МЕРОПРИЯТИЙ */
+    width: var(--calendar-width);
+    height: var(--event-height);
+    left: calc(var(--font-height) * 20 * 2 + var(--menu-width));
+    top: calc(var(--font-height) * 350);
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    position: absolute;
+}
+
+.calendar { /* Невидимая рамка - группа для календаря */
+    width: calc(100vw - (var(--font-height) * 20 * 4 + var(--menu-width) + var(--calendar-width)));
+    height: var(--menu-height);
+    left: calc(var(--font-height) * 20 * 3 + var(--menu-width) + var(--calendar-width));
+    top: calc(var(--font-height) * 20);
+    margin: 0;
+    border-radius: 30px;
+    display: flex;
+    position: relative;
+}
+
+.calendarfon { /* Фон календаря */
+    width: calc(100vw - (var(--font-height) * 20 * 4 + var(--menu-width) + var(--calendar-width)));
+    height: var(--menu-height);
+    background: linear-gradient(to bottom left, #B0FBFF 0%, #EEC5FF 100%);
+    opacity: 0.5;
+    margin: 0;
+    border-radius: 30px;
+    display: flex;
+    z-index: 3;
+    position: absolute;
+}
+
+.grid { /* Белый фон внутри календаря */
+    width: calc(100vw - (var(--font-height) * 20 * 5 + var(--menu-width) + var(--calendar-width)));
+    height: var(--grid-height);
+    left: calc(var(--font-height) * 10);
+    top: calc(var(--font-height) * 110);
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
+    position: absolute;
+}
+
+.square {
+    width: var(--square-size);
+    height: var(--square-size);
+    border-radius: 20px;
+    position: absolute;
+    left: calc(var(--font-width) * 16);
+}
+
+.squaremero { /* плашка мероприятия в календаре */
+    width: var(--square-event-width); /* зависит от вложенности! */
+    height: var(--square-event-height); /* зависит от времени! */
+    left: calc(var(--font-width) * 266);
+    top: calc(var(--font-height) * 303);
+    background-color: rgb(102, 247, 198);
+    border-radius: 20px;
+    z-index: 5;
+    position: absolute;
+}
+
+.square1 {
+    background-color: #FE8484;
+    top: calc(var(--font-width) * 16);
+}
+
+.square2 {
+    background-color: #4D6CBA;
+    top: calc(var(--font-width) * 124);
+}
+
+.square3 {
+    background-color: #1C8C92;
+    top: calc(var(--font-width) * 216);
+}
+
+.line {
+    width: calc(var(--font-width) * 78);
+    height: 1px;
+    background-color: #8E8E8E;
+    border-radius: 5px;
+    position: absolute; 
+    top: calc(var(--font-width) * 110);
+    left: calc(var(--font-width) * 16);
+}
+
+.custom-button {
+    width: calc(var(--font-width) * 140);
+    height: calc(100vh * 28 / 1050);
+    background-color: white; /* Цвет фона кнопки */
+    color: #4A5660; /* Цвет текста кнопки */
+    border: none; /* Убираем стандартную рамку */
+    border-radius: 14px; /* Скругленные края */
+    cursor: pointer; /* Курсор при наведении */
+    transition: background-color 0.3s, color 0.3s; /* Плавный переход цвета */
+    font-family: 'Montserrat', sans-serif; /* Применение шрифта Montserrat */
+    font-size: calc(100vh * 20 / 1100); /* Размер шрифта */
+    /* Центрирование по горизонтали */
+    /*display: block; /* Задаем кнопке блочную модель */
+    margin: 0 auto; /* Автоматические отступы по бокам */
+}
+
+.custom-button:hover {
+    background-color: #1C8C92; /* Цвет фона при наведении */
+    color: white; /* Цвет текста при наведении */
+}
+
+
+#body2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    position: absolute; /* Добавлено для наложения */
+    z-index: 1000; /* Поместите ссылку поверх изображения */
+    width: 300px;
+    height: 150px;
+    background-color: rgba(209, 253, 255, 0.32);
+    top: 50px; /* Примерное значение */
+    left: 50px; /* Примерное значение */
+    pointer-events: auto;
+}
+
+.rectangle {
+    margin: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.large {
+    width: 300px;
+    height: 150px;
+    background-color: rgba(209, 253, 255, 0.32); /* Полупрозрачный синий */
+}
+
+.arrow_left {
+    width: 150px;
+    height: 75px;
+    background-color: rgba(209, 253, 255, 0.32); /* Полупрозрачный синий */
+}
+
+.rectangle:hover {
+    background-color: #E1FAFF; /* Непрозрачный синий при наведении */
+}
