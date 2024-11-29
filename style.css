@@ -16,18 +16,18 @@ body {
     background: linear-gradient(to bottom left, #1C8C92 30%, #4D6CBA 70%, #6F3388 100%);
     height: 100vh;
     margin: 0;
-    position: relative; /* для правильной работы абсолютного позиционирования */
+    position: relative; /* ┬д┬л├п ┬п├а┬а┬в┬и┬л├м┬н┬о┬й ├а┬а┬б┬о├в├л ┬а┬б├б┬о┬л├о├в┬н┬о┬г┬о ┬п┬о┬з┬и├ж┬и┬о┬н┬и├а┬о┬в┬а┬н┬и├п */
 }
 
 html, body {
-    overflow: hidden; /* Убирает скроллы */
-    height: 100%; /* Убедитесь, что высота 100% */
+    overflow: hidden; /* тАЬ┬б┬и├а┬а┬е├в ├б┬к├а┬о┬л┬л├л */
+    height: 100%; /* тАЬ┬б┬е┬д┬и├в┬е├б├м, ├з├в┬о ┬в├л├б┬о├в┬а 100% */
 }
 
-.menu { /* МЕНЮ */
+.menu { /* ┼ТтАж┬Н┼╛ */
     width: var(--menu-width);
     height: var(--menu-height);
-    left: calc(var(--font-height) * 20); /* отступы снизу = сверху */
+    left: calc(var(--font-height) * 20); /* ┬о├в├б├в├г┬п├л ├б┬н┬и┬з├г = ├б┬в┬е├а├е├г */
     top: calc(var(--font-height) * 20);
     background-color: white;
     border-radius: 30px;
@@ -38,7 +38,7 @@ html, body {
     position: absolute;
 }
 
-.container2 { /* КАЛЕНДАРЬ */
+.container2 { /* ┼атВмтА╣тАж┬НтАЮтВм┬Р┼У */
     width: var(--calendar-width);
     height: var(--calendar-height);
     left: calc(var(--font-height) * 20 * 2 + var(--menu-width));
@@ -52,7 +52,7 @@ html, body {
     position: absolute;
 }
 
-.container3 { /* ВЫБОРКА МЕРОПРИЯТИЙ */
+.container3 { /* тАЪтА║┬Б┼╜┬Р┼атВм ┼ТтАж┬Р┼╜┬П┬Р╦Ж┼╕тАЩ╦ЖтА░ */
     width: var(--calendar-width);
     height: var(--event-height);
     left: calc(var(--font-height) * 20 * 2 + var(--menu-width));
@@ -66,18 +66,20 @@ html, body {
     position: absolute;
 }
 
-.calendar { /* Невидимая рамка - группа для календаря */
+.calendar { /* ┬Н┬е┬в┬и┬д┬и┬м┬а├п ├а┬а┬м┬к┬а - ┬г├а├г┬п┬п┬а ┬д┬л├п ┬к┬а┬л┬е┬н┬д┬а├а├п */
     width: calc(100vw - (var(--font-height) * 20 * 4 + var(--menu-width) + var(--calendar-width)));
     height: var(--menu-height);
     left: calc(var(--font-height) * 20 * 3 + var(--menu-width) + var(--calendar-width));
     top: calc(var(--font-height) * 20);
     margin: 0;
+    position: relative;
+    z-index: 10;
     border-radius: 30px;
     display: flex;
     position: relative;
 }
 
-.calendarfon { /* Фон календаря */
+.calendarfon { /* тАЭ┬о┬н ┬к┬а┬л┬е┬н┬д┬а├а├п */
     width: calc(100vw - (var(--font-height) * 20 * 4 + var(--menu-width) + var(--calendar-width)));
     height: var(--menu-height);
     background: linear-gradient(to bottom left, #B0FBFF 0%, #EEC5FF 100%);
@@ -89,7 +91,7 @@ html, body {
     position: absolute;
 }
 
-.grid { /* Белый фон внутри календаря */
+.grid { /* ┬Б┬е┬л├л┬й ├д┬о┬н ┬в┬н├г├в├а┬и ┬к┬а┬л┬е┬н┬д┬а├а├п */
     width: calc(100vw - (var(--font-height) * 20 * 5 + var(--menu-width) + var(--calendar-width)));
     height: var(--grid-height);
     left: calc(var(--font-height) * 10);
@@ -111,9 +113,9 @@ html, body {
     left: calc(var(--font-width) * 16);
 }
 
-.squaremero { /* плашка мероприятия в календаре */
-    width: var(--square-event-width); /* зависит от вложенности! */
-    height: var(--square-event-height); /* зависит от времени! */
+.squaremero { /* ┬п┬л┬а├и┬к┬а ┬м┬е├а┬о┬п├а┬и├п├в┬и├п ┬в ┬к┬а┬л┬е┬н┬д┬а├а┬е */
+    width: var(--square-event-width); /* ┬з┬а┬в┬и├б┬и├в ┬о├в ┬в┬л┬о┬ж┬е┬н┬н┬о├б├в┬и! */
+    height: var(--square-event-height); /* ┬з┬а┬в┬и├б┬и├в ┬о├в ┬в├а┬е┬м┬е┬н┬и! */
     left: calc(var(--font-width) * 266);
     top: calc(var(--font-height) * 303);
     background-color: rgb(102, 247, 198);
@@ -150,58 +152,63 @@ html, body {
 .custom-button {
     width: calc(var(--font-width) * 140);
     height: calc(100vh * 28 / 1050);
-    background-color: white; /* Цвет фона кнопки */
-    color: #4A5660; /* Цвет текста кнопки */
-    border: none; /* Убираем стандартную рамку */
-    border-radius: 14px; /* Скругленные края */
-    cursor: pointer; /* Курсор при наведении */
-    transition: background-color 0.3s, color 0.3s; /* Плавный переход цвета */
-    font-family: 'Montserrat', sans-serif; /* Применение шрифта Montserrat */
-    font-size: calc(100vh * 20 / 1100); /* Размер шрифта */
-    /* Центрирование по горизонтали */
-    /*display: block; /* Задаем кнопке блочную модель */
-    margin: 0 auto; /* Автоматические отступы по бокам */
+    background-color: white; /* тАУ┬в┬е├в ├д┬о┬н┬а ┬к┬н┬о┬п┬к┬и */
+    color: #4A5660; /* тАУ┬в┬е├в ├в┬е┬к├б├в┬а ┬к┬н┬о┬п┬к┬и */
+    border: none; /* тАЬ┬б┬и├а┬а┬е┬м ├б├в┬а┬н┬д┬а├а├в┬н├г├о ├а┬а┬м┬к├г */
+    border-radius: 14px; /* тАШ┬к├а├г┬г┬л┬е┬н┬н├л┬е ┬к├а┬а├п */
+    cursor: pointer; /* ┼а├г├а├б┬о├а ┬п├а┬и ┬н┬а┬в┬е┬д┬е┬н┬и┬и */
+    transition: background-color 0.3s, color 0.3s; /* ┬П┬л┬а┬в┬н├л┬й ┬п┬е├а┬е├е┬о┬д ├ж┬в┬е├в┬а */
+    font-family: 'Montserrat', sans-serif; /* ┬П├а┬и┬м┬е┬н┬е┬н┬и┬е ├и├а┬и├д├в┬а Montserrat */
+    font-size: calc(100vh * 20 / 1100); /* ┬Р┬а┬з┬м┬е├а ├и├а┬и├д├в┬а */
+    /* тАУ┬е┬н├в├а┬и├а┬о┬в┬а┬н┬и┬е ┬п┬о ┬г┬о├а┬и┬з┬о┬н├в┬а┬л┬и */
+    /*display: block; /* тАб┬а┬д┬а┬е┬м ┬к┬н┬о┬п┬к┬е ┬б┬л┬о├з┬н├г├о ┬м┬о┬д┬е┬л├м */
+    margin: 0 auto; /* тВм┬в├в┬о┬м┬а├в┬и├з┬е├б┬к┬и┬е ┬о├в├б├в├г┬п├л ┬п┬о ┬б┬о┬к┬а┬м */
 }
 
 .custom-button:hover {
-    background-color: #1C8C92; /* Цвет фона при наведении */
-    color: white; /* Цвет текста при наведении */
+    background-color: #1C8C92; /* тАУ┬в┬е├в ├д┬о┬н┬а ┬п├а┬и ┬н┬а┬в┬е┬д┬е┬н┬и┬и */
+    color: white; /* тАУ┬в┬е├в ├в┬е┬к├б├в┬а ┬п├а┬и ┬н┬а┬в┬е┬д┬е┬н┬и┬и */
 }
 
 
+/* #body2 */
 #body2 {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #f0f0f0;
-    position: absolute; /* Добавлено для наложения */
-    z-index: 1000; /* Поместите ссылку поверх изображения */
+    position: absolute;
+    z-index: 3000;
     width: 300px;
     height: 150px;
     background-color: rgba(209, 253, 255, 0.32);
-    top: 50px; /* Примерное значение */
-    left: 50px; /* Примерное значение */
+    top: 50px;
+    left: 50px;
     pointer-events: auto;
 }
 
+/* ╨н╤В╨╛╤В ╨║╨╗╨░╤Б╤Б ╨┐╤А╨╕╨╝╨╡╨╜╤П╨╡╤В╤Б╤П ╨║ ╤Н╨╗╨╡╨╝╨╡╨╜╤В╨░╨╝, ╨║╨╛╤В╨╛╤А╤Л╨╡ ╨┤╨╛╨╗╨╢╨╜╤Л ╨╝╨╡╨╜╤П╤В╤М ╤Ж╨▓╨╡╤В ╨┐╤А╨╕ ╨╜╨░╨▓╨╡╨┤╨╡╨╜╨╕╨╕ */
 .rectangle {
     margin: 20px;
     transition: background-color 0.3s ease;
+    z-index: 250;
 }
 
+/* ╨Ю╤Б╨╜╨╛╨▓╨╜╨╛╨╣ ╤Б╤В╨╕╨╗╤М ╨┤╨╗╤П ╤Н╨╗╨╡╨╝╨╡╨╜╤В╨░ .large */
 .large {
     width: 300px;
     height: 150px;
-    background-color: rgba(209, 253, 255, 0.32); /* Полупрозрачный синий */
+    background-color: rgba(209, 253, 255, 0.32); /* ╨Э╨░╤З╨░╨╗╤М╨╜╤Л╨╣ ╤Ж╨▓╨╡╤В */
+    transition: background-color 0.3s ease; /* ╨Ф╨╛╨▒╨░╨▓╨╗╤П╨╡╨╝ ╨┐╨╗╨░╨▓╨╜╤Л╨╣ ╨┐╨╡╤А╨╡╤Е╨╛╨┤ */
 }
 
-.arrow_left {
-    width: 150px;
-    height: 75px;
-    background-color: rgba(209, 253, 255, 0.32); /* Полупрозрачный синий */
+/* ╨Я╤А╨╕ ╨╜╨░╨▓╨╡╨┤╨╡╨╜╨╕╨╕ ╨╜╨░ ╤Н╨╗╨╡╨╝╨╡╨╜╤В ╤Б ╨║╨╗╨░╤Б╤Б╨╛╨╝ .large, ╨╡╨│╨╛ ╤Ж╨▓╨╡╤В ╨╝╨╡╨╜╤П╨╡╤В╤Б╤П */
+.large:hover {
+    background-color: #E1FAFF; /* ╨ж╨▓╨╡╤В ╨┐╤А╨╕ ╨╜╨░╨▓╨╡╨┤╨╡╨╜╨╕╨╕ */
 }
 
-.rectangle:hover {
-    background-color: #E1FAFF; /* Непрозрачный синий при наведении */
+/* ╨Я╤А╨╕╨╝╨╡╨╜╨╡╨╜╨╕╨╡ hover ╨║ .rectangle ╤В╨░╨║╨╢╨╡ */
+.rectangle:hover .large {
+    background-color: #E1FAFF; /* ╨ж╨▓╨╡╤В ╨┐╤А╨╕ ╨╜╨░╨▓╨╡╨┤╨╡╨╜╨╕╨╕ ╨┤╨╗╤П ╨┐╤А╤П╨╝╨╛╤Г╨│╨╛╨╗╤М╨╜╨╕╨║╨░ */
 }
