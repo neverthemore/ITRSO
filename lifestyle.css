@@ -81,9 +81,17 @@ a:first-of-type > button {
     width: 30%;
 }
 
+a:first-of-type > button:hover {
+    background: linear-gradient(45deg, #4F4BB3, #06A684); /* Градиент по диагонали при наведении */
+}
+
 a:nth-of-type(2) > button {
     background-color: #848484;
     color: white;
     width: 60%;
+}
+
+a:nth-of-type(2) > button:hover {
+    background-color: #1C8C92; 
 }
 

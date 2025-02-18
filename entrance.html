@@ -6,7 +6,10 @@
     <title>Вход</title>
     <link rel="stylesheet" href="lifestyle.css?rnd=<?= time()>">
 </head>
-
+<style>
+    body {
+        font-family: 'Montserrat', sans-serif;}
+</style>
 <body>
 <form class="card"
       action="src/actions/login.php"
@@ -29,7 +32,7 @@
                 required>
     </div>
     <a href="/home.php"><button type="button">Войти</button></a>
-    <a href="/register.php"><button type="button">Регистрация</button></a>
+    <a href="register.html"><button type="button">Регистрация</button></a>
     <p> <a href="/register.php">Забыли пароль?</a></p>
 </form>
 </body>
