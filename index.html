@@ -1,10 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
-    <link rel="stylesheet" href="style.css"> <!-- Подключаем CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Обновленные стили для календаря */
+        .mini-calendar {
+            font-family: 'Montserrat', sans-serif;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            color: #4A5660; /* Основной цвет текста */
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            font-weight: 600;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        .calendar-month-year {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: 40; /* Тонкое начертание */
+            color: #4A5660; /* Цвет текста */
+            font-size: 14px; /* Размер шрифта */
+            letter-spacing: 0.5px; /* Опционально: небольшие разряжения букв */
+        }
+        
+        .calendar-nav {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .calendar-prev {
+            margin-right: auto; /* Стрелка "назад" слева */
+        }
+        
+        .calendar-next {
+            margin-left: auto; /* Стрелка "вперед" справа */
+        }
+        
+        .calendar-nav button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #B5BEC6;
+            padding: 0 15px;
+        }
+        
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: 300; /* Тонкое начертание */
+            font-size: 8px; /* Меньший размер */
+            color: #B5BEC6; /* Новый цвет */
+            padding: 8px 0 5px; /* Отрегулированные отступы */
+            text-transform: uppercase; /* Опционально: делает текст заглавными буквами */
+        }
+        
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            padding: 5px;
+        }
+        
+        .calendar-day {
+            text-align: center;
+            width: 24px; /* Фиксированная ширина */
+            height: 24px; /* Фиксированная высота */
+            border-radius: 50%; /* Всегда круг */
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 400;
+            color: #4A5660;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            box-sizing: border-box;
+            transition: background-color 0.2s ease; /* Только анимация фона */
+        }
+
+        .calendar-day:not(.other-month):hover {
+            background: #c7efa7;
+            /* Не меняем размеры и позиционирование - они уже заданы */
+        }
+
+        .current-day {
+            background: linear-gradient(135deg, #a29fed, #c7efa7);
+            color: white;
+            font-weight: 600;
+            /* Используем те же размеры, что и у .calendar-day */
+        }
+                
+        .other-month {
+            color: #B0BEC5;
+        }
+        
+        
+
+    </style>
 </head>
 <body>
     
@@ -14,8 +125,29 @@
         <div class="square square3"></div>
         <div class="line"></div>
     </div>
-    <div class="container2"></div>       <!--Мини календарь--> 
-    <div class="container3"></div>       <!--Организации--> 
+    <div class="container2">       <!--Мини календарь--> 
+        <div class="mini-calendar">
+            <div class="calendar-header">
+                <div class="calendar-nav">
+                        <button class="calendar-prev">‹</button>
+                        <button class="calendar-next">›</button>
+                </div>
+                <span class="calendar-month-year"></span>
+            </div>
+            <div class="calendar-weekdays">
+                <div>Пн</div>
+                <div>Вт</div>
+                <div>Ср</div>
+                <div>Чт</div>
+                <div>Пт</div>
+                <div>Сб</div>
+                <div>Вс</div>
+            </div>
+            <div class="calendar-days"></div>
+        </div>
+    </div>
+    <!--<div class="container3"></div>       Организации--> 
+
     <div class="calendar">               <!--Сам календарь--> 
         <div class="calendarfon"></div>
         <div class="grid">
@@ -23,11 +155,97 @@
                 <div style="text-align:center"></div>
             </div>
         </div>
-        <div class="body2 rectangle">
-            <div class="large"></div>     <!--Элемент, который при наведении должен менять цвет-->
-        </div>
+        <div class="calendar-body rectangle large"></div>    <!--Элемент, который при наведении должен менять цвет-->
     </div>
     
-    <script src="app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Мини-календарь
+            const monthYearElement = document.querySelector('.calendar-month-year');
+            const daysElement = document.querySelector('.calendar-days');
+            const prevButton = document.querySelector('.calendar-prev');
+            const nextButton = document.querySelector('.calendar-next');
+            
+            let currentDate = new Date();
+            let currentMonth = currentDate.getMonth();
+            let currentYear = currentDate.getFullYear();
+            
+            function renderMiniCalendar() {
+                // Очищаем предыдущие дни
+                daysElement.innerHTML = '';
+                
+                // Устанавливаем заголовок (месяц и год)
+                const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+                                   "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+                monthYearElement.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+                
+                // Получаем первый день месяца и количество дней в месяце
+                const firstDay = new Date(currentYear, currentMonth, 1);
+                const lastDay = new Date(currentYear, currentMonth + 1, 0);
+                const daysInMonth = lastDay.getDate();
+                
+                // Получаем день недели первого дня месяца (0 - воскресенье, 1 - понедельник и т.д.)
+                let firstDayOfWeek = firstDay.getDay();
+                if (firstDayOfWeek === 0) firstDayOfWeek = 7; // Делаем воскресенье 7-м днем
+                
+                // Добавляем пустые ячейки для дней предыдущего месяца
+                for (let i = 1; i < firstDayOfWeek; i++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.classList.add('calendar-day', 'other-month');
+                    const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
+                    dayElement.textContent = prevMonthLastDay - (firstDayOfWeek - i - 1);
+                    daysElement.appendChild(dayElement);
+                }
+                
+                // Добавляем дни текущего месяца
+                const today = new Date();
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.classList.add('calendar-day');
+                    dayElement.textContent = i;
+                    
+                    // Проверяем, является ли день текущим днем
+                    if (i === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) {
+                        dayElement.classList.add('current-day');
+                    }
+                    
+                    daysElement.appendChild(dayElement);
+                }
+                
+                // Добавляем дни следующего месяца, чтобы заполнить оставшиеся ячейки
+                const totalCells = Math.ceil((firstDayOfWeek - 1 + daysInMonth) / 7) * 7;
+                const remainingCells = totalCells - (firstDayOfWeek - 1 + daysInMonth);
+                
+                for (let i = 1; i <= remainingCells; i++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.classList.add('calendar-day', 'other-month');
+                    dayElement.textContent = i;
+                    daysElement.appendChild(dayElement);
+                }
+            }
+            
+            // Обработчики кнопок навигации
+            prevButton.addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                renderMiniCalendar();
+            });
+            
+            nextButton.addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                renderMiniCalendar();
+            });
+            
+            // Первоначальная отрисовка календаря
+            renderMiniCalendar();
+        });
+    </script>
 </body>
 </html>

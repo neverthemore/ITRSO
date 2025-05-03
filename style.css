@@ -4,41 +4,61 @@
     --menu-width: calc(var(--font-width) * 110);
     --menu-height: calc(var(--font-height) * 1010);
     --calendar-width: calc(var(--font-width) * 358);
-    --calendar-height: calc(var(--font-height) * 310);
+    --calendar-height: auto;
     --event-height: calc(var(--font-height) * 206);
     --grid-height: calc(var(--font-height) * 890);
     --square-size: calc(var(--font-width) * 78);
     --square-event-width: calc(var(--font-width) * 154);
     --square-event-height: calc(var(--font-width) * 300);
+    --calendar-font-size: calc(var(--font-width) * 16);
+    --calendar-header-size: calc(var(--font-width) * 18);
+}
+
+.calendar-header {
+    font-size: var(--calendar-header-size);
+}
+
+.calendar-weekdays {
+    font-size: calc(var(--calendar-font-size) * 0.9);
+}
+
+
+
+.calendar-day {
+    font-size: var(--calendar-font-size);
+}
+
+
+
+.calendar-nav button {
+    font-size: var(--calendar-header-size);
 }
 
 body {
     background: linear-gradient(to bottom left, #1C8C92 30%, #4D6CBA 70%, #6F3388 100%);
     height: 100vh;
     margin: 0;
-    position: relative; /* ¤«ï ¯à ¢¨«ì­®© à ¡®âë  ¡á®«îâ­®£® ¯®§¨æ¨®­¨à®¢ ­¨ï */
 }
 
 html, body {
-    overflow: hidden; /* “¡¨à ¥â áªà®««ë */
-    height: 100%; /* “¡¥¤¨â¥áì, çâ® ¢ëá®â  100% */
+    overflow: hidden; /* Убирает скроллы */
+    height: 100%; /* Убедитесь, что высота 100% */
 }
 
-.menu { /* Œ…ž */
+.menu { /* МЕНЮ */
     width: var(--menu-width);
     height: var(--menu-height);
-    left: calc(var(--font-height) * 20); /* ®âáâã¯ë á­¨§ã = á¢¥àåã */
+    left: calc(var(--font-height) * 20); /* отступы снизу = сверху */
     top: calc(var(--font-height) * 20);
     background-color: white;
     border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1;
     position: absolute;
 }
 
-.container2 { /* Š€‹…„€œ */
+.container2 { /* КАЛЕНДАРЬ */
     width: var(--calendar-width);
     height: var(--calendar-height);
     left: calc(var(--font-height) * 20 * 2 + var(--menu-width));
@@ -48,11 +68,10 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1;
     position: absolute;
 }
 
-.container3 { /* ‚›ŽŠ€ Œ…ŽˆŸ’ˆ‰ */
+.container3 { /* ВЫБОРКА МЕРОПРИЯТИЙ */
     width: var(--calendar-width);
     height: var(--event-height);
     left: calc(var(--font-height) * 20 * 2 + var(--menu-width));
@@ -62,24 +81,21 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2;
     position: absolute;
 }
 
-.calendar { /* ¥¢¨¤¨¬ ï à ¬ª  - £àã¯¯  ¤«ï ª «¥­¤ àï */
+.calendar { /* Невидимая рамка - группа для календаря */
     width: calc(100vw - (var(--font-height) * 20 * 4 + var(--menu-width) + var(--calendar-width)));
     height: var(--menu-height);
     left: calc(var(--font-height) * 20 * 3 + var(--menu-width) + var(--calendar-width));
     top: calc(var(--font-height) * 20);
     margin: 0;
-    position: relative;
-    z-index: 10;
     border-radius: 30px;
     display: flex;
     position: relative;
 }
 
-.calendarfon { /* ”®­ ª «¥­¤ àï */
+.calendarfon { /* Фон календаря */
     width: calc(100vw - (var(--font-height) * 20 * 4 + var(--menu-width) + var(--calendar-width)));
     height: var(--menu-height);
     background: linear-gradient(to bottom left, #B0FBFF 0%, #EEC5FF 100%);
@@ -87,11 +103,10 @@ html, body {
     margin: 0;
     border-radius: 30px;
     display: flex;
-    z-index: 3;
     position: absolute;
 }
 
-.grid { /* ¥«ë© ä®­ ¢­ãâà¨ ª «¥­¤ àï */
+.grid { /* Белый фон внутри календаря */
     width: calc(100vw - (var(--font-height) * 20 * 5 + var(--menu-width) + var(--calendar-width)));
     height: var(--grid-height);
     left: calc(var(--font-height) * 10);
@@ -101,7 +116,6 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 4;
     position: absolute;
 }
 
@@ -113,14 +127,13 @@ html, body {
     left: calc(var(--font-width) * 16);
 }
 
-.squaremero { /* ¯« èª  ¬¥à®¯à¨ïâ¨ï ¢ ª «¥­¤ à¥ */
-    width: var(--square-event-width); /* § ¢¨á¨â ®â ¢«®¦¥­­®áâ¨! */
-    height: var(--square-event-height); /* § ¢¨á¨â ®â ¢à¥¬¥­¨! */
+.squaremero {     /* плашка мероприятия в календаре */
+    width: var(--square-event-width); /* зависит от вложенности! */
+    height: var(--square-event-height); /* зависит от времени! */
     left: calc(var(--font-width) * 266);
     top: calc(var(--font-height) * 303);
     background-color: rgb(102, 247, 198);
     border-radius: 20px;
-    z-index: 5;
     position: absolute;
 }
 
@@ -152,63 +165,81 @@ html, body {
 .custom-button {
     width: calc(var(--font-width) * 140);
     height: calc(100vh * 28 / 1050);
-    background-color: white; /* –¢¥â ä®­  ª­®¯ª¨ */
-    color: #4A5660; /* –¢¥â â¥ªáâ  ª­®¯ª¨ */
-    border: none; /* “¡¨à ¥¬ áâ ­¤ àâ­ãî à ¬ªã */
-    border-radius: 14px; /* ‘ªàã£«¥­­ë¥ ªà ï */
-    cursor: pointer; /* Šãàá®à ¯à¨ ­ ¢¥¤¥­¨¨ */
-    transition: background-color 0.3s, color 0.3s; /* « ¢­ë© ¯¥à¥å®¤ æ¢¥â  */
-    font-family: 'Montserrat', sans-serif; /* à¨¬¥­¥­¨¥ èà¨äâ  Montserrat */
-    font-size: calc(100vh * 20 / 1100); /*  §¬¥à èà¨äâ  */
-    /* –¥­âà¨à®¢ ­¨¥ ¯® £®à¨§®­â «¨ */
-    /*display: block; /* ‡ ¤ ¥¬ ª­®¯ª¥ ¡«®ç­ãî ¬®¤¥«ì */
-    margin: 0 auto; /* €¢â®¬ â¨ç¥áª¨¥ ®âáâã¯ë ¯® ¡®ª ¬ */
+    background-color: white; /* Цвет фона кнопки */
+    color: #4A5660; /* Цвет текста кнопки */
+    border: none; /* Убираем стандартную рамку */
+    border-radius: 14px; /* Скругленные края */
+    cursor: pointer; /* Курсор при наведении */
+    transition: background-color 0.3s, color 0.3s; /* Плавный переход цвета */
+    font-family: 'Montserrat', sans-serif; /* Применение шрифта Montserrat */
+    font-size: calc(100vh * 20 / 1100); /* Размер шрифта */
+    /* Центрирование по горизонтали */
+    /*display: block; /* Задаем кнопке блочную модель */
+    margin: 0 auto; /* Автоматические отступы по бокам */
 }
 
 .custom-button:hover {
-    background-color: #1C8C92; /* –¢¥â ä®­  ¯à¨ ­ ¢¥¤¥­¨¨ */
-    color: white; /* –¢¥â â¥ªáâ  ¯à¨ ­ ¢¥¤¥­¨¨ */
+    background-color: #1C8C92; /* Цвет фона при наведении */
+    color: white; /* Цвет текста при наведении */
 }
 
 
-/* #body2 */
-#body2 {
+body2 {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #f0f0f0;
-    position: absolute;
-    z-index: 3000;
+    position: absolute; /* Добавлено для наложения */
+    z-index: 1; /* Поместите ссылку поверх изображения */
     width: 300px;
     height: 150px;
     background-color: rgba(209, 253, 255, 0.32);
-    top: 50px;
-    left: 50px;
-    pointer-events: auto;
+    top: 50px; /* Примерное значение */
+    left: 50px; /* Примерное значение */
+    pointer-events: none;
 }
 
-/* Этот класс применяется к элементам, которые должны менять цвет при наведении */
 .rectangle {
     margin: 20px;
     transition: background-color 0.3s ease;
-    z-index: 250;
 }
 
-/* Основной стиль для элемента .large */
 .large {
     width: 300px;
     height: 150px;
-    background-color: rgba(209, 253, 255, 0.32); /* Начальный цвет */
-    transition: background-color 0.3s ease; /* Добавляем плавный переход */
+    background-color: rgba(209, 253, 255, 0.32); /* Полупрозрачный синий */
 }
 
-/* При наведении на элемент с классом .large, его цвет меняется */
-.large:hover {
-    background-color: #E1FAFF; /* Цвет при наведении */
+.arrow_left {
+    width: 150px;
+    height: 75px;
+    background-color: rgba(209, 253, 255, 0.32); /* Полупрозрачный синий */
 }
 
-/* Применение hover к .rectangle также */
-.rectangle:hover .large {
-    background-color: #E1FAFF; /* Цвет при наведении для прямоугольника */
+.rectangle:hover {
+    background-color: #E1FAFF; /* Непрозрачный синий при наведении */
+}
+
+
+.calendar-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 150px;
+    background-color: rgba(209, 253, 255, 0.32);
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    z-index: 2; /* Убедимся, что элемент выше других */
+    transition: background-color 0.3s ease;
+    pointer-events: auto; /* Разрешаем взаимодействие */
+    border-radius: 10px; /* Добавим скругление углов */
+}
+
+.calendar-body:hover {
+    background-color: #E1FAFF;
+    box-shadow: 0 0 10px rgba(225, 250, 255, 0.5); /* Дополнительный эффект */
 }
