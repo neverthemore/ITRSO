@@ -5,14 +5,158 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .plash {
+            width: calc(100vw - (var(--font-height) * 20 * 3 + var(--menu-width)));
+            height: var(--menu-height);
+            left: calc(var(--font-height) * 20 * 2 + var(--menu-width));
+            top: calc(var(--font-height) * 20);
+            margin: 0;
+            border-radius: 30px;
+            display: flex;
+            position: relative;
+        }
+
+        .plashfon {
+            width: calc(100vw - (var(--font-height) * 20 * 3 + var(--menu-width)));
+            height: var(--menu-height);
+            background: #ffffff;
+            margin: 0;
+            border-radius: 30px;
+            display: flex;
+            position: absolute;
+        }
+        
+        .avatar-wrapper {
+            left: 20px;
+            top: 20px;
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+        
+        .avatar-container {
+            width: 100%;
+            height: 100%;
+            background-color: #FE8484;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .avatar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(217, 217, 217, 0.33);
+            color: #0162B3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            text-align: center;
+            border-radius: 15px;
+        }
+        
+        .avatar-container:hover .avatar-overlay {
+            opacity: 1;
+        }
+        
+        .avatar-container:hover {
+            opacity: 0.9;
+        }
+        
+        .avatar-input {
+            display: none;
+        }
+        
+        /* Стили для аватарки в меню */
+        .menu-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
     <div class="menu">
-        <a href="account.html" class="square square1"></a>
+        <a href="account.html" class="square square1">
+            <img src="" alt="Аватар" class="menu-avatar" id="menuAvatar">
+        </a>
         <div class="square square2"></div>
         <a href="index.html" class="square square3"></a>
         <div class="line"></div>
     </div>
+    
+    <div class="plash">
+        <div class="plashfon">
+            <div class="avatar-wrapper">
+                <div class="avatar-container" id="avatarContainer">
+                    <img src="ava.png" alt="Аватар" class="avatar" id="avatarImage">
+                    <div class="avatar-overlay">Изменить аватарку</div>
+                    <input type="file" id="avatarInput" class="avatar-input" accept="image/*">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Функция для обновления всех аватарок
+        function updateAllAvatars(imageData) {
+            // Сохраняем в localStorage
+            localStorage.setItem('userAvatar', imageData);
+            
+            // Обновляем аватарки на текущей странице
+            document.getElementById('avatarImage').src = imageData;
+            document.getElementById('menuAvatar').src = imageData;
+            
+            // Здесь можно добавить обновление других аватарок на странице
+        }
+        
+        // Загрузка сохраненной аватарки при открытии страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedAvatar = localStorage.getItem('userAvatar');
+            if (savedAvatar) {
+                updateAllAvatars(savedAvatar);
+            } else {
+                // Устанавливаем дефолтную аватарку
+                updateAllAvatars('ava.png');
+            }
+        });
+        
+        // Обработчик изменения аватарки
+        document.getElementById('avatarContainer').addEventListener('click', function() {
+            document.getElementById('avatarInput').click();
+        });
+        
+        document.getElementById('avatarInput').addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(event) {
+                    updateAllAvatars(event.target.result);
+                }
+                
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+    </script>
+    
     <script src="app.js"></script>
 </body>
 </html>

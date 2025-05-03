@@ -137,6 +137,7 @@ html, body {
     position: absolute;
 }
 
+
 .square1 {
     background-color: #FE8484;
     top: calc(var(--font-width) * 16);
@@ -231,8 +232,8 @@ body2 {
     height: 150px;
     background-color: rgba(209, 253, 255, 0.32);
     position: absolute;
-    top: 50px;
-    left: 50px;
+    top: 10px;
+    left: 10px;
     z-index: 2; /* Убедимся, что элемент выше других */
     transition: background-color 0.3s ease;
     pointer-events: auto; /* Разрешаем взаимодействие */
@@ -241,5 +242,4 @@ body2 {
 
 .calendar-body:hover {
     background-color: #E1FAFF;
-    box-shadow: 0 0 10px rgba(225, 250, 255, 0.5); /* Дополнительный эффект */
 }

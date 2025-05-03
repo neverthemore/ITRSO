@@ -13,7 +13,7 @@
             height: 100%;
             padding: 10px;
             box-sizing: border-box;
-            color: #4A5660; /* Основной цвет текста */
+            color: #4A5660;
         }
         
         .calendar-header {
@@ -30,10 +30,10 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            font-weight: 40; /* Тонкое начертание */
-            color: #4A5660; /* Цвет текста */
-            font-size: 14px; /* Размер шрифта */
-            letter-spacing: 0.5px; /* Опционально: небольшие разряжения букв */
+            font-weight: 40;
+            color: #4A5660;
+            font-size: 14px;
+            letter-spacing: 0.5px;
         }
         
         .calendar-nav {
@@ -44,11 +44,11 @@
         }
         
         .calendar-prev {
-            margin-right: auto; /* Стрелка "назад" слева */
+            margin-right: auto;
         }
         
         .calendar-next {
-            margin-left: auto; /* Стрелка "вперед" справа */
+            margin-left: auto;
         }
         
         .calendar-nav button {
@@ -66,11 +66,11 @@
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             text-align: center;
-            font-weight: 300; /* Тонкое начертание */
-            font-size: 8px; /* Меньший размер */
-            color: #B5BEC6; /* Новый цвет */
-            padding: 8px 0 5px; /* Отрегулированные отступы */
-            text-transform: uppercase; /* Опционально: делает текст заглавными буквами */
+            font-weight: 300;
+            font-size: 8px;
+            color: #B5BEC6;
+            padding: 8px 0 5px;
+            text-transform: uppercase;
         }
         
         .calendar-days {
@@ -82,9 +82,9 @@
         
         .calendar-day {
             text-align: center;
-            width: 24px; /* Фиксированная ширина */
-            height: 24px; /* Фиксированная высота */
-            border-radius: 50%; /* Всегда круг */
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
             cursor: pointer;
             font-size: 12px;
             font-weight: 400;
@@ -94,33 +94,40 @@
             justify-content: center;
             margin: 0 auto;
             box-sizing: border-box;
-            transition: background-color 0.2s ease; /* Только анимация фона */
+            transition: background-color 0.2s ease;
         }
 
         .calendar-day:not(.other-month):hover {
             background: #c7efa7;
-            /* Не меняем размеры и позиционирование - они уже заданы */
         }
 
         .current-day {
             background: linear-gradient(135deg, #a29fed, #c7efa7);
             color: white;
             font-weight: 600;
-            /* Используем те же размеры, что и у .calendar-day */
         }
                 
         .other-month {
             color: #B0BEC5;
         }
         
-        
+        /* Стили для аватарки в меню */
+        .menu-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    
 
     </style>
 </head>
 <body>
     
     <div class="menu">       <!--Меню--> 
-        <a href="account.html" class="square square1"></a>
+        <a href="account.html" class="square square1">
+            <img src="" alt="Аватар" class="menu-avatar" id="menuAvatar">
+        </a>
         <div class="square square2"></div>
         <div class="square square3"></div>
         <div class="line"></div>
@@ -159,7 +166,16 @@
     </div>
     
     <script>
+        // Загрузка сохраненной аватарки при открытии страницы
         document.addEventListener('DOMContentLoaded', function() {
+            const savedAvatar = localStorage.getItem('userAvatar');
+            if (savedAvatar) {
+                document.getElementById('menuAvatar').src = savedAvatar;
+            } else {
+                // Устанавливаем дефолтную аватарку
+                document.getElementById('menuAvatar').src = 'ava.png';
+            }
+            
             // Мини-календарь
             const monthYearElement = document.querySelector('.calendar-month-year');
             const daysElement = document.querySelector('.calendar-days');
